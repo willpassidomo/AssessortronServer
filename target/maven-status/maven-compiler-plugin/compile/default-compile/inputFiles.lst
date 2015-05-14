@@ -1,0 +1,16 @@
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/AssesortronAPI/Constants.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Objects/DrawRequestDTO.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Objects/WalkThroughDTO.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Objects/SiteWalkDTO.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Database/Database.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Interfaces/WritableContainer.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Interfaces/Writer.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Assesortron/Emailer.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Objects/StringWrapper.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Assesortron/ExcelConverter.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Objects/ProjectDTO.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Assesortron/TaskerImpl.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Interfaces/Writeable.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Database/PMF.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/Objects/ChangeOrderDTO.java
+/Users/willpassidomo/NetBeansProjects/AssesortronServer/src/main/java/AssesortronAPI/TaskerAPI.java

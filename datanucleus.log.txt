@@ -1,0 +1,28 @@
+11:05:38,448 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer for API "JDO"
+11:05:39,408 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.1) : Enhancement of classes
+11:05:41,671 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/Users/willpassidomo/NetBeansProjects/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/ChangeOrderDTO.class" with enhanced definition
+11:05:41,696 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/Users/willpassidomo/NetBeansProjects/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/DrawRequestDTO.class" with enhanced definition
+11:05:41,737 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/Users/willpassidomo/NetBeansProjects/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/ProjectDTO.class" with enhanced definition
+11:05:41,757 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/Users/willpassidomo/NetBeansProjects/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/WalkThroughDTO.class" with enhanced definition
+11:05:41,759 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 4 classes. Timings : input=2068 ms, enhance=280 ms, total=2348 ms. Consult the log for full details
+11:23:51,024 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer for API "JDO"
+11:23:51,577 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.1) : Enhancement of classes
+11:23:52,485 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/Users/willpassidomo/NetBeansProjects/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/ChangeOrderDTO.class" with enhanced definition
+11:23:52,496 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/Users/willpassidomo/NetBeansProjects/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/DrawRequestDTO.class" with enhanced definition
+11:23:52,523 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/Users/willpassidomo/NetBeansProjects/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/ProjectDTO.class" with enhanced definition
+11:23:52,556 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/Users/willpassidomo/NetBeansProjects/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/WalkThroughDTO.class" with enhanced definition
+11:23:52,557 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 4 classes. Timings : input=775 ms, enhance=203 ms, total=978 ms. Consult the log for full details
+13:55:02,074 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer for API "JDO"
+13:55:02,793 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.1) : Enhancement of classes
+13:55:03,828 (main) INFO  [DataNucleus.Enhancer] - Class "Objects.ChangeOrderDTO" is already enhanced.
+13:55:03,830 (main) INFO  [DataNucleus.Enhancer] - Class "Objects.DrawRequestDTO" is already enhanced.
+13:55:03,833 (main) INFO  [DataNucleus.Enhancer] - Class "Objects.ProjectDTO" is already enhanced.
+13:55:03,835 (main) INFO  [DataNucleus.Enhancer] - Class "Objects.WalkThroughDTO" is already enhanced.
+13:55:03,835 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 4 classes. Timings : input=966 ms, enhance=72 ms, total=1038 ms. Consult the log for full details
+14:14:54,386 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer for API "JDO"
+14:14:55,011 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.1) : Enhancement of classes
+14:14:56,140 (main) INFO  [DataNucleus.Enhancer] - Class "Objects.ChangeOrderDTO" is already enhanced.
+14:14:56,142 (main) INFO  [DataNucleus.Enhancer] - Class "Objects.DrawRequestDTO" is already enhanced.
+14:14:56,144 (main) INFO  [DataNucleus.Enhancer] - Class "Objects.ProjectDTO" is already enhanced.
+14:14:56,146 (main) INFO  [DataNucleus.Enhancer] - Class "Objects.WalkThroughDTO" is already enhanced.
+14:14:56,147 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 4 classes. Timings : input=1019 ms, enhance=114 ms, total=1133 ms. Consult the log for full details

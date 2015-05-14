@@ -1,0 +1,593 @@
+{
+ "kind": "discovery#restDescription",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/BkBjiBQKpZI-J1LNOzaQh_Flz0Q\"",
+ "discoveryVersion": "v1",
+ "id": "assesortronTaskerAPI:v1",
+ "name": "assesortronTaskerAPI",
+ "version": "v1",
+ "description": "This is an API",
+ "ownerDomain": "AssesorTron",
+ "ownerName": "AssesorTron",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rest",
+ "baseUrl": "https://primal-carport-86803.appspot.com/_ah/api/assesortronTaskerAPI/v1/",
+ "basePath": "/_ah/api/assesortronTaskerAPI/v1/",
+ "rootUrl": "https://primal-carport-86803.appspot.com/_ah/api/",
+ "servicePath": "assesortronTaskerAPI/v1/",
+ "batchPath": "batch",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "BigDecimal": {
+   "id": "BigDecimal",
+   "type": "object",
+   "properties": {
+    "scale": {
+     "type": "integer",
+     "format": "int32"
+    }
+   }
+  },
+  "ChangeOrderDTO": {
+   "id": "ChangeOrderDTO",
+   "type": "object",
+   "properties": {
+    "amount": {
+     "type": "number",
+     "format": "double"
+    },
+    "amountString": {
+     "type": "string"
+    },
+    "dateSubmitted": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "dateSubmittedString": {
+     "type": "string"
+    },
+    "description": {
+     "type": "string"
+    },
+    "executed": {
+     "type": "boolean"
+    },
+    "executedString": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string"
+    },
+    "project": {
+     "$ref": "ProjectDTO"
+    },
+    "subContractor": {
+     "type": "string"
+    }
+   }
+  },
+  "DrawRequestDTO": {
+   "id": "DrawRequestDTO",
+   "type": "object",
+   "properties": {
+    "balanceToComplete": {
+     "$ref": "BigDecimal"
+    },
+    "balanceToCompleteString": {
+     "type": "string"
+    },
+    "contigencyDraw": {
+     "$ref": "BigDecimal"
+    },
+    "contingencyBalance": {
+     "$ref": "BigDecimal"
+    },
+    "contingencyBalanceString": {
+     "type": "string"
+    },
+    "contingencyDraw": {
+     "$ref": "BigDecimal"
+    },
+    "contingencyDrawString": {
+     "type": "string"
+    },
+    "currentRequest": {
+     "$ref": "BigDecimal"
+    },
+    "currentRequestString": {
+     "type": "string"
+    },
+    "date": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "dateString": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string"
+    },
+    "maxRequest": {
+     "$ref": "BigDecimal"
+    },
+    "maxRequestString": {
+     "type": "string"
+    },
+    "minRequest": {
+     "$ref": "BigDecimal"
+    },
+    "minRequestString": {
+     "type": "string"
+    },
+    "project": {
+     "$ref": "ProjectDTO"
+    },
+    "retainageRel": {
+     "$ref": "BigDecimal"
+    },
+    "retainageRelString": {
+     "type": "string"
+    }
+   }
+  },
+  "ProjectDTO": {
+   "id": "ProjectDTO",
+   "type": "object",
+   "properties": {
+    "actualCompletionDate": {
+     "type": "string"
+    },
+    "actualStartDate": {
+     "type": "string"
+    },
+    "address": {
+     "type": "string"
+    },
+    "changeOrders": {
+     "type": "array",
+     "items": {
+      "$ref": "ChangeOrderDTO"
+     }
+    },
+    "contractAmount": {
+     "$ref": "BigDecimal"
+    },
+    "contractAmountString": {
+     "type": "string"
+    },
+    "dateCreated": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "dateCreatedString": {
+     "type": "string"
+    },
+    "drawRequests": {
+     "type": "array",
+     "items": {
+      "$ref": "DrawRequestDTO"
+     }
+    },
+    "hasOutdoorWork": {
+     "type": "boolean"
+    },
+    "id": {
+     "type": "string"
+    },
+    "initialCompletionDate": {
+     "type": "string"
+    },
+    "initialStartDate": {
+     "type": "string"
+    },
+    "loanAmount": {
+     "$ref": "BigDecimal"
+    },
+    "loanAmountString": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    },
+    "numAGFloors": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "numAGFloorsString": {
+     "type": "string"
+    },
+    "numBasementFloors": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "numBasementFloorsString": {
+     "type": "string"
+    },
+    "numBasementFlors": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "pictures": {
+     "type": "array",
+     "items": {
+      "$ref": "UUID"
+     }
+    },
+    "sitePictures": {
+     "type": "array",
+     "items": {
+      "$ref": "UUID"
+     }
+    },
+    "squareFeet": {
+     "type": "number",
+     "format": "double"
+    },
+    "squareFeetString": {
+     "type": "string"
+    },
+    "walkThroughs": {
+     "type": "array",
+     "items": {
+      "$ref": "WalkThroughDTO"
+     }
+    },
+    "writeables": {
+     "type": "array",
+     "items": {
+      "$ref": "Writeable"
+     }
+    }
+   }
+  },
+  "ProjectDTOCollection": {
+   "id": "ProjectDTOCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "ProjectDTO"
+     }
+    }
+   }
+  },
+  "SiteWalkDTO": {
+   "id": "SiteWalkDTO",
+   "type": "object",
+   "properties": {
+    "changeOrders": {
+     "type": "array",
+     "items": {
+      "$ref": "ChangeOrderDTO"
+     }
+    },
+    "drawRequests": {
+     "type": "array",
+     "items": {
+      "$ref": "DrawRequestDTO"
+     }
+    },
+    "lastEntry": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "projectID": {
+     "$ref": "UUID"
+    },
+    "projectName": {
+     "type": "string"
+    },
+    "startDate": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "timeStarted": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "walkThroughs": {
+     "type": "array",
+     "items": {
+      "$ref": "WalkThroughDTO"
+     }
+    },
+    "writeables": {
+     "type": "array",
+     "items": {
+      "$ref": "Writeable"
+     }
+    }
+   }
+  },
+  "StringCollection": {
+   "id": "StringCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "StringWrapper": {
+   "id": "StringWrapper",
+   "type": "object",
+   "properties": {
+    "string": {
+     "type": "string"
+    }
+   }
+  },
+  "UUID": {
+   "id": "UUID",
+   "type": "object",
+   "properties": {
+    "leastSignificantBits": {
+     "type": "string",
+     "format": "int64"
+    },
+    "mostSignificantBits": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "WalkThroughDTO": {
+   "id": "WalkThroughDTO",
+   "type": "object",
+   "properties": {
+    "date": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "dateString": {
+     "type": "string"
+    },
+    "floor": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string"
+    },
+    "note": {
+     "type": "string"
+    },
+    "notes": {
+     "type": "string"
+    },
+    "pictures": {
+     "type": "array",
+     "items": {
+      "$ref": "UUID"
+     }
+    },
+    "progress": {
+     "type": "string"
+    },
+    "project": {
+     "$ref": "ProjectDTO"
+    },
+    "sitePictures": {
+     "type": "array",
+     "items": {
+      "$ref": "UUID"
+     }
+    },
+    "trade": {
+     "type": "string"
+    }
+   }
+  },
+  "WalkThroughDTOCollection": {
+   "id": "WalkThroughDTOCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "WalkThroughDTO"
+     }
+    }
+   }
+  },
+  "Writeable": {
+   "id": "Writeable",
+   "type": "object"
+  }
+ },
+ "resources": {
+  "taskerAPI": {
+   "methods": {
+    "getProjectA": {
+     "id": "assesortronTaskerAPI.taskerAPI.getProjectA",
+     "path": "projectdto/{projectId}",
+     "httpMethod": "GET",
+     "parameters": {
+      "projectId": {
+       "type": "string",
+       "required": true,
+       "location": "path"
+      }
+     },
+     "parameterOrder": [
+      "projectId"
+     ],
+     "response": {
+      "$ref": "ProjectDTO"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    },
+    "getProjects": {
+     "id": "assesortronTaskerAPI.taskerAPI.getProjects",
+     "path": "projectdtocollection",
+     "httpMethod": "GET",
+     "response": {
+      "$ref": "ProjectDTOCollection"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    },
+    "getStringTests": {
+     "id": "assesortronTaskerAPI.taskerAPI.getStringTests",
+     "path": "stringcollection",
+     "httpMethod": "GET",
+     "response": {
+      "$ref": "StringCollection"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    },
+    "getWalkThroughs": {
+     "id": "assesortronTaskerAPI.taskerAPI.getWalkThroughs",
+     "path": "walkthroughdtocollection",
+     "httpMethod": "GET",
+     "response": {
+      "$ref": "WalkThroughDTOCollection"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    },
+    "sendProjectExcel": {
+     "id": "assesortronTaskerAPI.taskerAPI.sendProjectExcel",
+     "path": "sendProjectExcel/{recipient}",
+     "httpMethod": "POST",
+     "parameters": {
+      "recipient": {
+       "type": "string",
+       "required": true,
+       "location": "path"
+      }
+     },
+     "parameterOrder": [
+      "recipient"
+     ],
+     "request": {
+      "$ref": "ProjectDTO",
+      "parameterName": "resource"
+     },
+     "response": {
+      "$ref": "StringWrapper"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    },
+    "submitProject": {
+     "id": "assesortronTaskerAPI.taskerAPI.submitProject",
+     "path": "submitProject",
+     "httpMethod": "POST",
+     "request": {
+      "$ref": "ProjectDTO",
+      "parameterName": "resource"
+     },
+     "response": {
+      "$ref": "StringWrapper"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    },
+    "submitSiteWalk": {
+     "id": "assesortronTaskerAPI.taskerAPI.submitSiteWalk",
+     "path": "submitSiteWalk",
+     "httpMethod": "POST",
+     "request": {
+      "$ref": "SiteWalkDTO",
+      "parameterName": "resource"
+     },
+     "response": {
+      "$ref": "StringWrapper"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    },
+    "submitTestList": {
+     "id": "assesortronTaskerAPI.taskerAPI.submitTestList",
+     "path": "submitTestList/{stringvalues}",
+     "httpMethod": "POST",
+     "parameters": {
+      "stringvalues": {
+       "type": "string",
+       "required": true,
+       "repeated": true,
+       "location": "path"
+      }
+     },
+     "parameterOrder": [
+      "stringvalues"
+     ],
+     "response": {
+      "$ref": "StringWrapper"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    }
+   }
+  }
+ }
+}
