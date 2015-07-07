@@ -25,8 +25,7 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
     private String projectName;
     
     private ArrayList<WalkThroughDTO> walkThroughs = new ArrayList<>();
-    private ArrayList<DrawRequestDTO> drawRequests = new ArrayList<>();
-    private ArrayList<ChangeOrderDTO> changeOrders = new ArrayList<>();
+    private DrawRequestDTO drawRequest;
     
     private ArrayList<Writeable> writeables = new ArrayList<>();
     
@@ -103,16 +102,10 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
     /**
      * @return the drawRequests
      */
-    public ArrayList<DrawRequestDTO> getDrawRequests() {
-        return drawRequests;
+    public DrawRequestDTO getDrawRequest() {
+        return drawRequest;
     }
 
-    /**
-     * @return the changeOrders
-     */
-    public ArrayList<ChangeOrderDTO> getChangeOrders() {
-        return changeOrders;
-    }
 
     /**
      * @param timeStarted the timeStarted to set
@@ -152,16 +145,10 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
     /**
      * @param drawRequests the drawRequests to set
      */
-    public void setDrawRequests(ArrayList<DrawRequestDTO> drawRequests) {
-        this.drawRequests = drawRequests;
+    public void setDrawRequest(DrawRequestDTO drawRequests) {
+        this.drawRequest = drawRequests;
     }
 
-    /**
-     * @param changeOrders the changeOrders to set
-     */
-    public void setChangeOrders(ArrayList<ChangeOrderDTO> changeOrders) {
-        this.changeOrders = changeOrders;
-    }
 
     /**
      * @param writeables the writeables to set

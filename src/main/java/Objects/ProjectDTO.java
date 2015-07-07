@@ -51,12 +51,8 @@ public class ProjectDTO implements WritableContainer {
 
 
     @Persistent(mappedBy = "project")
-    private List<ChangeOrderDTO> changeOrders;// = new ArrayList<ChangeOrder>();
-    @Persistent(defaultFetchGroup = "true")
-    private List<DrawRequestDTO> drawRequests;// = new ArrayList<DrawRequest>();
-    @Persistent()
-    private List<WalkThroughDTO> walkThroughs;// = new ArrayList<WalkThrough>();
-
+    private List<SiteWalkDTO> siteWalks;// = new ArrayList<ChangeOrder>();
+    
     public ProjectDTO(String string) {
 
     }
@@ -215,68 +211,17 @@ public class ProjectDTO implements WritableContainer {
         }
     }
 
-    public List<DrawRequestDTO> getDrawRequests() {
-        return drawRequests;
-    }
-
-    public DrawRequestDTO getDrawRequestById(String id) {
-        for (DrawRequestDTO dr : getDrawRequests()) {
-            if (dr.getId().equals(id)) {
-                return dr;
-            }
-        }
-        return null;
-    }
 
     public void addDrawRequests(DrawRequestDTO drawRequest) {
         //this.drawRequests.add(drawRequest);
     }
 
-    public List<WalkThroughDTO> getWalkThroughs() {
-        return walkThroughs;
-    }
-
-    public WalkThroughDTO getWalkThroughById(String id) {
-        for (WalkThroughDTO wt : getWalkThroughs()) {
-            if (wt.getId().equals(id)) {
-                return wt;
-            }
-        }
-        return null;
-    }
 
     public void addWalkThroughs(WalkThroughDTO walkThrough) {
         //walkThroughs.add(walkThrough);
     }
 
-    public List<ChangeOrderDTO> getChangeOrders() {
-        return changeOrders;
-    }
-
-    public ChangeOrderDTO getChangeOrderById(String id) {
-        for (ChangeOrderDTO co : getChangeOrders()) {
-            if (co.getId().equals(id)) {
-                return co;
-            }
-        }
-        return null;
-    }
-
-    public void addChangeOrder(ChangeOrderDTO changeOrder) {
-        //changeOrders.add(changeOrder);
-    }
-
-    public WalkThroughDTO removeWalkThrough(int i) {
-        return getWalkThroughs().remove(i);
-    }
-
-    public DrawRequestDTO removeDrawRequest(int i) {
-        return getDrawRequests().remove(i);
-    }
-
-    public ChangeOrderDTO removeChangeOrder(int i) {
-        return getChangeOrders().remove(i);
-    }
+ 
 
     public void addSitePicture(UUID pictureUri) {
         this.getPictures().add(pictureUri);
@@ -323,36 +268,13 @@ public class ProjectDTO implements WritableContainer {
         this.pictures = pictures;
     }
 
-    /**
-     * @param changeOrders the changeOrders to set
-     */
-    public void setChangeOrders(List<ChangeOrderDTO> changeOrders) {
-        this.changeOrders = changeOrders;
-    }
 
-    /**
-     * @param drawRequests the drawRequests to set
-     */
-    public void setDrawRequests(List<DrawRequestDTO> drawRequests) {
-        this.drawRequests = drawRequests;
-    }
-
-    /**
-     * @param walkThroughs the walkThroughs to set
-     */
-    public void setWalkThroughs(List<WalkThroughDTO> walkThroughs) {
-        this.walkThroughs = walkThroughs;
-    }
 
     @Override
     public List<Writeable> getWriteables() {
         List<Writeable> writeables = new ArrayList<Writeable>();
-        for(Writeable d: this.getDrawRequests())
+        for(Writeable d: this.getSiteWalks())
             writeables.add(d);
-        for(Writeable c: this.getChangeOrders())
-            writeables.add(c);
-        for(Writeable w: this.getWalkThroughs())
-            writeables.add(w);
         return writeables;
     }
 
@@ -374,5 +296,19 @@ public class ProjectDTO implements WritableContainer {
     @Override
     public List<Writeable> removeAll(Writeable writeable) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the siteWalks
+     */
+    public List<SiteWalkDTO> getSiteWalks() {
+        return siteWalks;
+    }
+
+    /**
+     * @param siteWalks the siteWalks to set
+     */
+    public void setSiteWalks(List<SiteWalkDTO> siteWalks) {
+        this.siteWalks = siteWalks;
     }
 }
