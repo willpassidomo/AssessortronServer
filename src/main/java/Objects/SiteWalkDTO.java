@@ -114,6 +114,10 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
     public void setTimeStarted(Date timeStarted) {
         this.timeStarted = timeStarted;
     }
+    
+    public void setTimeStatedLong(long timeStarted) {
+        setTimeStarted(new Date(timeStarted));
+    }
 
     /**
      * @param lastEntry the lastEntry to set
@@ -121,12 +125,24 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
     public void setLastEntry(Date lastEntry) {
         this.lastEntry = lastEntry;
     }
+    
+    public void setLastEntryLong(long lastEntry) {
+        setLastEntry(new Date(lastEntry));
+    }
+    
+    public void setFieldValues(List<FieldValueDTO> fieldValues) {
+        this.fieldValues = fieldValues;
+    }
 
     /**
      * @param projectID the projectID to set
      */
     public void setProjectID(UUID projectID) {
         this.projectID = projectID;
+    }
+    
+    public void setProjectIDString(String projectId) {
+        setProjectID(UUID.fromString(projectId));
     }
 
     /**
