@@ -118,4 +118,8 @@ public class DrawRequestItemDTO {
         this.dateSubmitted = dateSubmitted;
     }
     
+    public void setDateSubmittedLong(long dateSubmitted) {
+        this.dateSubmitted = new Date(dateSubmitted);
+    }
+     
 }

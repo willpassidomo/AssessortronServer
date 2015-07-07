@@ -23,6 +23,7 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
     private Date lastEntry;
     private UUID projectID;
     private String projectName;
+    private List<FieldValueDTO> fieldValues;
     
     private ArrayList<WalkThroughDTO> walkThroughs = new ArrayList<>();
     private DrawRequestDTO drawRequest;

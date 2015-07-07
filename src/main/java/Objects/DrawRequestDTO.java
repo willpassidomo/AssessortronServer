@@ -27,7 +27,7 @@ public class DrawRequestDTO implements Writeable{
     @Persistent(defaultFetchGroup = "true")
     private BigDecimal currentRecommendation;
     @Persistent(defaultFetchGroup = "true")
-    private BigDecimal conditions;
+    private String conditions;
     @Persistent(defaultFetchGroup = "true")
     private List<DrawRequestItemDTO> drawRequestItems;
 
@@ -57,6 +57,10 @@ public class DrawRequestDTO implements Writeable{
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    
+    public void setDateLong(long date) {
+        this.date = new Date(date);
     }
 
     public void setDateString(String date) {
@@ -109,18 +113,22 @@ public class DrawRequestDTO implements Writeable{
     public void setCurrentRecommendation(BigDecimal currentRecommendation) {
         this.currentRecommendation = currentRecommendation;
     }
+    
+    public void setCurrentRecommendationString(String currentRecommendation) {
+        this.currentRecommendation = new BigDecimal(currentRecommendation);
+    }
 
     /**
      * @return the conditions
      */
-    public BigDecimal getConditions() {
+    public String getConditions() {
         return conditions;
     }
 
     /**
      * @param conditions the conditions to set
      */
-    public void setConditions(BigDecimal conditions) {
+    public void setConditions(String conditions) {
         this.conditions = conditions;
     }
 
