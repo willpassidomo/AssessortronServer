@@ -160,3 +160,9 @@
 17:21:36,603 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/DrawRequestDTO.class" with enhanced definition
 17:21:36,615 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/ProjectDTO.class" with enhanced definition
 17:21:36,616 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 3 classes. Timings : input=246 ms, enhance=72 ms, total=318 ms. Consult the log for full details
+17:22:34,084 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer for API "JDO"
+17:22:34,273 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.1) : Enhancement of classes
+17:22:34,527 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/WalkThroughDTO.class" with enhanced definition
+17:22:34,535 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/DrawRequestDTO.class" with enhanced definition
+17:22:34,548 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes/Objects/ProjectDTO.class" with enhanced definition
+17:22:34,549 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 3 classes. Timings : input=214 ms, enhance=60 ms, total=274 ms. Consult the log for full details

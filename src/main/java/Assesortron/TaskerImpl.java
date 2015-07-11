@@ -150,7 +150,7 @@ public class TaskerImpl {
     public static boolean sendSiteWalkExcel(SiteWalkDTO siteWalk, String recipient) {
         ExcelConverter doc = new ExcelConverter();
         byte[] excelFile = null;
-        String docName = siteWalk.getProjectName() + "_SiteWalk_" + (siteWalk.getTimeStarted().getMonth() + 1) + "." + siteWalk.getTimeStarted().getDay() + ".xls";
+        String docName = siteWalk.getProjectName().replace(" ", "_") + "_SiteWalk_" + (siteWalk.getTimeStarted().getMonth() + 1) + "." + siteWalk.getTimeStarted().getDay() + ".xls";
         doc.open("testFile", LOCAL_TESTING);
         doc.renderSiteWalks(siteWalk);
         excelFile = doc.saveDocument();     
