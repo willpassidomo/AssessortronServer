@@ -6,7 +6,6 @@
 
 package Database;
 
-import Objects.ChangeOrderDTO;
 import Objects.DrawRequestDTO;
 import Objects.ProjectDTO;
 import Objects.SiteWalkDTO;
@@ -36,15 +35,17 @@ public class Database {
         //TODO
         //should this go here, since it is totally neccessary for retreival
         //that the project field is not null, as a validation type check?
-        for (WalkThroughDTO wt: project.getWalkThroughs()) {
-            wt.setProject(project);
-        }
-        for (ChangeOrderDTO co: project.getChangeOrders()) {
-            co.setProject(project);
-        }
-        for (DrawRequestDTO dr: project.getDrawRequests()) {
-            dr.setProject(project);
-        }
+
+
+//        for (WalkThroughDTO wt: project.getWalkThroughs()) {
+//            wt.setProject(project);
+//        }
+//        for (ChangeOrderDTO co: project.getChangeOrders()) {
+//            co.setProject(project);
+//        }
+//        for (DrawRequestDTO dr: project.getDrawRequests()) {
+//            dr.setProject(project);
+//        }
         
         pm = PMF.get().getPersistenceManager();
         try
@@ -69,9 +70,9 @@ public class Database {
     public static ProjectDTO getProject3(String projectId) {
         Key key = KeyFactory.createKey(ProjectDTO.class.getSimpleName(), projectId);
         ProjectDTO project = pm.getObjectById(ProjectDTO.class, key);
-        project.getWalkThroughs();
-        project.getDrawRequests();
-        project.getChangeOrders();
+//        project.getWalkThroughs();
+//        project.getDrawRequests();
+//        project.getChangeOrders();
         return project;
     }
     

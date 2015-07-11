@@ -6,9 +6,6 @@
 
 package Objects;
 
-import Interfaces.WritableContainer;
-import Interfaces.Writeable;
-import Interfaces.Writer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,18 +15,16 @@ import java.util.UUID;
  *
  * @author willpassidomo
  */
-public class SiteWalkDTO implements WritableContainer, Writeable {
+public class SiteWalkDTO {
     private Date timeStarted;
     private Date lastEntry;
     private UUID projectID;
     private String projectName;
     private List<FieldValueDTO> fieldValues;
+    private List<WalkThroughDTO> walkThroughs = new ArrayList<>();
     
-    private ArrayList<WalkThroughDTO> walkThroughs = new ArrayList<>();
     private DrawRequestDTO drawRequest;
-    
-    private ArrayList<Writeable> writeables = new ArrayList<>();
-    
+        
     public Date getStartDate() {
         return getTimeStarted();
     }
@@ -38,39 +33,6 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
         return projectName;
     }
 
-    @Override
-    public List<Writeable> getWriteables() {
-//        writeables.add(this);
-//        writeables.addAll(drawRequests);
-//        writeables.addAll(changeOrders);
-//        writeables.addAll(walkThroughs);
-        return writeables;
-    }
-
-    @Override
-    public void add(Writeable writeable) {
-        getWriteables().add(writeable);
-    }
-
-    @Override
-    public Writeable remove(Writeable writeable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(Writeable writeable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Writeable> removeAll(Writeable writeable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void visit(Writer writer) {
-        writer.write(this);
-    }
 
     /**
      * @return the timeStarted
@@ -96,7 +58,7 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
     /**
      * @return the walkThroughs
      */
-    public ArrayList<WalkThroughDTO> getWalkThroughs() {
+    public List<WalkThroughDTO> getWalkThroughs() {
         return walkThroughs;
     }
 
@@ -155,7 +117,7 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
     /**
      * @param walkThroughs the walkThroughs to set
      */
-    public void setWalkThroughs(ArrayList<WalkThroughDTO> walkThroughs) {
+    public void setWalkThroughs(List<WalkThroughDTO> walkThroughs) {
         this.walkThroughs = walkThroughs;
     }
 
@@ -164,16 +126,6 @@ public class SiteWalkDTO implements WritableContainer, Writeable {
      */
     public void setDrawRequest(DrawRequestDTO drawRequests) {
         this.drawRequest = drawRequests;
-    }
-
-
-    /**
-     * @param writeables the writeables to set
-     */
-    public void setWriteables(ArrayList<Writeable> writeables) {
-        this.writeables = writeables;
-    }
-    
-    
+    }    
     
 }

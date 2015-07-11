@@ -1,8 +1,6 @@
 package Objects;
 
 
-import Interfaces.Writeable;
-import Interfaces.Writer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +13,7 @@ import javax.jdo.annotations.PrimaryKey;
  * Created by willpassidomo on 1/15/15.
  */
 @PersistenceCapable
-public class WalkThroughDTO implements Writeable {
+public class WalkThroughDTO {
     @Persistent
     private String id;
     @Persistent
@@ -127,11 +125,6 @@ public class WalkThroughDTO implements Writeable {
     public void addSitePicture(String stringUri) {
         UUID uuid = (UUID.fromString(stringUri));
         addSitePicture(uuid);
-    }
-
-    @Override
-    public void visit(Writer writer) {
-        writer.write(this);
     }
 
     /**

@@ -8,6 +8,7 @@ package AssesortronAPI;
 
 import Assesortron.TaskerImpl;
 import Database.Database;
+import Objects.FieldValueDTO;
 import Objects.ProjectDTO;
 import Objects.SiteWalkDTO;
 import Objects.StringWrapper;
@@ -61,18 +62,18 @@ public class TaskerAPI {
     
     public StringWrapper submitSiteWalk(SiteWalkDTO siteWalk) {
         Database.storeSiteWalk(siteWalk);
-        return new StringWrapper(siteWalk.getWalkThroughs().size()+"");
+        return new StringWrapper(siteWalk.getWalkThroughs().size()+" SiteWalks Recieved");
     }
     
     public StringWrapper submitProject(ProjectDTO project) {
         if (project != null) {
-            if (project.getWalkThroughs()!= null) {
+            if (project.getName()!= null) {
                 Database.storeProject(project);
             } else return new StringWrapper("walkThroughs was null");
         } else {
             return new StringWrapper("project was null");
         }
-        return new StringWrapper(project.getWalkThroughs().size()+"");
+        return new StringWrapper(project.getSiteWalks().size()+"");
     }
 
     
@@ -88,6 +89,11 @@ public class TaskerAPI {
     public List<ProjectDTO> getProjects() {
         return Database.getProjects("");
     }
+    
+    public List<FieldValueDTO> getFieldValues(@Named("projectId") String projectId) {
+        return null;
+    }
+    
     
  /**
     public ProjectDTO getProjectB(@Named("projectId") String projectId) {

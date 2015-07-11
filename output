@@ -1,0 +1,116 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for Assesortron:AssesortronServer:war:1.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.(groupId:artifactId)' must be unique but found duplicate declaration of plugin com.google.appengine:appengine-maven-plugin @ line 166, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] Using the builder org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder with a thread count of 1
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building AssesortronServer 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ AssesortronServer ---
+[INFO] Deleting /home/otf/code/AssesortronServer/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ AssesortronServer ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ AssesortronServer ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 17 source files to /home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes
+[WARNING] /home/otf/code/AssesortronServer/src/main/java/Objects/ProjectDTO.java: Some input files use or override a deprecated API.
+[WARNING] /home/otf/code/AssesortronServer/src/main/java/Objects/ProjectDTO.java: Recompile with -Xlint:deprecation for details.
+[WARNING] /home/otf/code/AssesortronServer/src/main/java/Database/Database.java: /home/otf/code/AssesortronServer/src/main/java/Database/Database.java uses unchecked or unsafe operations.
+[WARNING] /home/otf/code/AssesortronServer/src/main/java/Database/Database.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- versions-maven-plugin:2.1:display-dependency-updates (default) @ AssesortronServer ---
+[INFO] The following dependencies in Dependencies have newer versions:
+[INFO]   com.google.appengine:appengine-api-1.0-sdk .......... 1.9.17 -> 1.9.23
+[INFO]   com.google.appengine:appengine-api-stubs ............ 1.9.18 -> 1.9.23
+[INFO]   com.google.appengine:appengine-endpoints ............ 1.9.17 -> 1.9.23
+[INFO]   com.google.appengine:appengine-testing .............. 1.9.18 -> 1.9.23
+[INFO]   javax.jdo:jdo-api ....................................... 3.0.1 -> 3.1
+[INFO]   javax.servlet:servlet-api ......................... 2.5 -> 3.0-alpha-1
+[INFO]   junit:junit ............................................. 4.11 -> 4.12
+[INFO]   org.apache.poi:poi ...................................... 3.11 -> 3.12
+[INFO]   org.datanucleus:datanucleus-api-jdo ........... 3.1.3 -> 4.1.0-release
+[INFO]   org.datanucleus:datanucleus-core ...................... 3.1.4 -> 4.1.1
+[INFO]   org.mockito:mockito-all .......................... 1.9.5 -> 2.0.2-beta
+[INFO] 
+[INFO] 
+[INFO] --- versions-maven-plugin:2.1:display-plugin-updates (default) @ AssesortronServer ---
+[INFO] 
+[INFO] The following plugin updates are available:
+[INFO]   com.google.appengine:appengine-maven-plugin ........ 1.9.18 -> 1.9.23
+[INFO]   maven-compiler-plugin .................................... 3.1 -> 3.3
+[INFO]   maven-war-plugin ......................................... 2.4 -> 2.6
+[INFO]   org.codehaus.mojo:versions-maven-plugin .................. 2.1 -> 2.2
+[INFO] 
+[WARNING] The following plugins do not have their version specified:
+[WARNING]   maven-clean-plugin ........................ (from super-pom) 2.6.1
+[WARNING]   maven-deploy-plugin ....................... (from super-pom) 2.8.2
+[WARNING]   maven-install-plugin ...................... (from super-pom) 2.5.2
+[WARNING]   maven-resources-plugin ...................... (from super-pom) 2.7
+[WARNING]   maven-site-plugin ........................... (from super-pom) 3.4
+[WARNING]   maven-surefire-plugin .................... (from super-pom) 2.18.1
+[INFO] 
+[INFO] Project defines minimum Maven version as: 3.1.0
+[INFO] Plugins require minimum Maven version of: 3.1.0
+[INFO] Note: the super-pom from Maven 3.2.1 defines some of the plugin
+[INFO]       versions and may be influencing the plugins required minimum Maven
+[INFO]       version.
+[INFO] 
+[INFO] No plugins require a newer version of Maven than specified by the pom.
+[INFO] 
+[INFO] 
+[INFO] --- appengine-maven-plugin:1.9.1:enhance (default) @ AssesortronServer ---
+[INFO] DataNucleus Enhancer (version 3.1.1) : Enhancement of classes
+DataNucleus Enhancer completed with success for 3 classes. Timings : input=195 ms, enhance=60 ms, total=255 ms. Consult the log for full details
+
+[INFO] 
+[INFO] --- appengine-maven-plugin:1.9.1:endpoints_get_discovery_doc (default) @ AssesortronServer ---
+[INFO] 
+[INFO] Google App Engine Java SDK - get endpoints discovery doc...
+[INFO] Using Class Name:AssesortronAPI.TaskerAPI
+[INFO] Executing endpoints Command=[get-discovery-doc, -cp, /home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes:/home/otf/code/AssesortronServer/target/classes:/home/otf/.m2/repository/com/google/appengine/appengine-api-1.0-sdk/1.9.17/appengine-api-1.0-sdk-1.9.17.jar:/home/otf/.m2/repository/com/google/appengine/appengine-endpoints/1.9.17/appengine-endpoints-1.9.17.jar:/home/otf/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar:/home/otf/.m2/repository/javax/jdo/jdo-api/3.0.1/jdo-api-3.0.1.jar:/home/otf/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar:/home/otf/.m2/repository/org/datanucleus/datanucleus-api-jdo/3.1.3/datanucleus-api-jdo-3.1.3.jar:/home/otf/.m2/repository/org/apache/poi/poi/3.11/poi-3.11.jar:/home/otf/.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar, -o, /home/otf/code/AssesortronServer/target/generated-sources/appengine-endpoints/WEB-INF, -w, /home/otf/code/AssesortronServer/target/generated-sources/appengine-endpoints, -f, rest, AssesortronAPI.TaskerAPI]
+API Discovery Document written to /home/otf/code/AssesortronServer/target/generated-sources/appengine-endpoints/WEB-INF/assesortronTaskerAPI-v1-rest.discovery
+[INFO] Using Class Name:AssesortronAPI.TaskerAPI
+[INFO] Executing endpoints Command=[get-discovery-doc, -cp, /home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT/WEB-INF/classes:/home/otf/code/AssesortronServer/target/classes:/home/otf/.m2/repository/com/google/appengine/appengine-api-1.0-sdk/1.9.17/appengine-api-1.0-sdk-1.9.17.jar:/home/otf/.m2/repository/com/google/appengine/appengine-endpoints/1.9.17/appengine-endpoints-1.9.17.jar:/home/otf/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar:/home/otf/.m2/repository/javax/jdo/jdo-api/3.0.1/jdo-api-3.0.1.jar:/home/otf/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar:/home/otf/.m2/repository/org/datanucleus/datanucleus-api-jdo/3.1.3/datanucleus-api-jdo-3.1.3.jar:/home/otf/.m2/repository/org/apache/poi/poi/3.11/poi-3.11.jar:/home/otf/.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar, -o, /home/otf/code/AssesortronServer/target/generated-sources/appengine-endpoints/WEB-INF, -w, /home/otf/code/AssesortronServer/target/generated-sources/appengine-endpoints, -f, rpc, AssesortronAPI.TaskerAPI]
+API Discovery Document written to /home/otf/code/AssesortronServer/target/generated-sources/appengine-endpoints/WEB-INF/assesortronTaskerAPI-v1-rpc.discovery
+[INFO] Endpoints discovery doc generation done.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ AssesortronServer ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/otf/code/AssesortronServer/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ AssesortronServer ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ AssesortronServer ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- maven-war-plugin:2.4:war (default-war) @ AssesortronServer ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [AssesortronServer] in [/home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT]
+[INFO] Processing war project
+[INFO] Copying webapp webResources [/home/otf/code/AssesortronServer/target/generated-sources/appengine-endpoints] to [/home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT]
+[INFO] Copying webapp resources [/home/otf/code/AssesortronServer/src/main/webapp]
+[INFO] Webapp assembled in [70 msecs]
+[INFO] Building war: /home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT.war
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ AssesortronServer ---
+[INFO] Installing /home/otf/code/AssesortronServer/target/AssesortronServer-1.0-SNAPSHOT.war to /home/otf/.m2/repository/Assesortron/AssesortronServer/1.0-SNAPSHOT/AssesortronServer-1.0-SNAPSHOT.war
+[INFO] Installing /home/otf/code/AssesortronServer/pom.xml to /home/otf/.m2/repository/Assesortron/AssesortronServer/1.0-SNAPSHOT/AssesortronServer-1.0-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 6.900 s
+[INFO] Finished at: 2015-07-07T18:55:34-05:00
+[INFO] Final Memory: 38M/348M
+[INFO] ------------------------------------------------------------------------

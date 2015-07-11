@@ -1,8 +1,7 @@
 package Objects;
 
 
-import Interfaces.Writeable;
-import Interfaces.Writer;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +14,7 @@ import javax.jdo.annotations.PrimaryKey;
  * Created by willpassidomo on 1/15/15.
  */
 @PersistenceCapable
-public class DrawRequestDTO implements Writeable{
+public class DrawRequestDTO{
     @Persistent
     private String id;
     @Persistent
@@ -79,12 +78,6 @@ public class DrawRequestDTO implements Writeable{
         this.currentRequest = new BigDecimal(currentRequest);
     }
 
-
-
-    @Override
-    public void visit(Writer writer) {
-        writer.write(this);
-    }
 
     /**
      * @return the project

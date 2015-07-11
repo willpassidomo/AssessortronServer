@@ -1,7 +1,5 @@
 package Objects;
 
-import Interfaces.WritableContainer;
-import Interfaces.Writeable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +14,7 @@ import javax.jdo.annotations.PrimaryKey;
  * Created by willpassidomo on 1/14/15.
  */
 @PersistenceCapable
-public class ProjectDTO implements WritableContainer {
+public class ProjectDTO {
     @PrimaryKey
     private String id;
     @Persistent(defaultFetchGroup = "true")
@@ -266,36 +264,6 @@ public class ProjectDTO implements WritableContainer {
      */
     public void setPictures(List<UUID> pictures) {
         this.pictures = pictures;
-    }
-
-
-
-    @Override
-    public List<Writeable> getWriteables() {
-        List<Writeable> writeables = new ArrayList<Writeable>();
-        for(Writeable d: this.getSiteWalks())
-            writeables.add(d);
-        return writeables;
-    }
-
-    @Override
-    public void add(Writeable writeable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Writeable remove(Writeable writeable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(Writeable writeable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Writeable> removeAll(Writeable writeable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

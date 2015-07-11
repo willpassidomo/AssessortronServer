@@ -1,13 +1,8 @@
 package Assesortron;
 
-/**
-  * Add your first API methods in this class, or you may create another class. In that case, please
-  * update your web.xml accordingly.
- **/
 import Database.Database;
-import Interfaces.Writer;
-import Objects.ChangeOrderDTO;
 import Objects.DrawRequestDTO;
+import Objects.DrawRequestItemDTO;
 import Objects.ProjectDTO;
 import Objects.SiteWalkDTO;
 import Objects.WalkThroughDTO;
@@ -34,16 +29,12 @@ import org.apache.poi.ss.util.WorkbookUtil;
 import org.apache.poi.util.IOUtils;
 
 
-public class ExcelConverter implements Writer {
+public class ExcelConverter {
     
-    private static final int itemTitleColumn = 1;
-    private static final int itemValueColumn = 2;
-    private static final int typeRowBufferHeight = 2;
-    private static final int startingRow = 2;
-    
-    private List<ChangeOrderDTO> changeOrders = new ArrayList<>();
-    private List<WalkThroughDTO> walkThroughs = new ArrayList<>(); 
-    private List<DrawRequestDTO> drawRequests = new ArrayList<>();
+    private static final int ITEM_TITLE_COLUMN = 1;
+    private static final int ITEM_VALUE_COLUMN = 2;
+    private static final int TYPE_ROW_BUFFER_HEIGHT = 2;
+    private static final int STARTING_ROW = 2;
     
     int rowNumber;
     int columnNumber;
@@ -55,67 +46,32 @@ public class ExcelConverter implements Writer {
         wb = new HSSFWorkbook();
         wb.createSheet(WorkbookUtil.createSafeSheetName(nameProposal));
     }
-
-    @Override
-    public void write(ChangeOrderDTO changeOrder) {
-        changeOrders.add(changeOrder);
-    }
-
-    @Override
-    public void write(DrawRequestDTO drawRequest) {
-        drawRequests.add(drawRequest);
+    
+    public void renderProject(ProjectDTO project) {
+        for(SiteWalkDTO sw: project.getSiteWalks()) {
+            renderSiteWalks(sw);
+        }
     }
     
-    @Override
-    public void write(ProjectDTO project) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void write(SiteWalkDTO siteWalk) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void write(WalkThroughDTO walkThrough) {
-        walkThroughs.add(walkThrough);
-    }
-    
-    public void renderDocument() {
+    public void renderSiteWalks(SiteWalkDTO siteWalk) {
         Sheet sheet = wb.getSheetAt(0);
-        Row row = sheet.createRow(startingRow);
-        Cell startingCell = row.createCell(itemTitleColumn);
+        Row row = sheet.createRow(STARTING_ROW);
+        Cell startingCell = row.createCell(ITEM_TITLE_COLUMN);
         CreationHelper createHelper = wb.getCreationHelper();
         
-        startingCell.setCellValue(createHelper.createRichTextString("Draw Requests"));
+        startingCell.setCellValue(createHelper.createRichTextString("Draw Request"));
         startingCell = moveCellDown(startingCell, sheet, 1);
-        startingCell = startingCell.getRow().createCell(itemValueColumn);
-        
-        for(DrawRequestDTO drawRequest: drawRequests) {
-            startingCell = render(drawRequest, startingCell);
-        }
-        
-        startingCell = moveCellDown(startingCell, sheet, typeRowBufferHeight);
-        startingCell = startingCell.getRow().createCell(itemTitleColumn);
-        startingCell.setCellValue(createHelper.createRichTextString("Change Orders"));
-        startingCell = moveCellDown(startingCell, sheet, 1);
-        startingCell = startingCell.getRow().createCell(itemValueColumn);
-        
-        ChangeOrderDTO[] changeOrdersArray = new ChangeOrderDTO[changeOrders.size()];
-        startingCell = render(changeOrders.toArray(changeOrdersArray), startingCell);
-        
-        startingCell = moveCellDown(startingCell, sheet, typeRowBufferHeight);
-        startingCell = startingCell.getRow().createCell(itemTitleColumn);
+        startingCell = startingCell.getRow().createCell(ITEM_VALUE_COLUMN);
+
+        startingCell = render(siteWalk.getDrawRequest(), startingCell);
+
+        startingCell = moveCellDown(startingCell, sheet, TYPE_ROW_BUFFER_HEIGHT);
+        startingCell = startingCell.getRow().createCell(ITEM_TITLE_COLUMN);
         startingCell.setCellValue(createHelper.createRichTextString("Walk Throughs"));
         startingCell = moveCellDown(startingCell, sheet, 1);
-        startingCell = startingCell.getRow().createCell(itemValueColumn);
-        
-        WalkThroughDTO[] walkThroughsArray = new WalkThroughDTO[walkThroughs.size()];
-        startingCell = render(walkThroughs.toArray(walkThroughsArray), startingCell);
-        
-                //need to do the rest for ChangeOrderDTO and WalkThroughs
-                //rught now, staring cell is just below the last "balance to complete"
-                // lable in the last DrawRequestDTO
+        startingCell = startingCell.getRow().createCell(ITEM_VALUE_COLUMN);
+
+        startingCell = render(siteWalk.getWalkThroughs(), startingCell, null);
     }
     
     public byte[] saveDocument() throws IOException {
@@ -130,81 +86,71 @@ public class ExcelConverter implements Writer {
 //        return file;
     }
     
-    private Cell render(ChangeOrderDTO[] changeOrders, Cell startingCell) {
-        Sheet sheet = wb.getSheetAt(0);
-        CreationHelper createHelper = wb.getCreationHelper();
-        
-        String[] headers = {
-            "Sub contractor",
-            "amount",
-            "description",
-            "executed?"
-        };
-        
-        
-        for (int i = 0; i < headers.length; i++) {
-            startingCell.setCellValue(createHelper.createRichTextString(headers[i]));
-            startingCell = moveCellRight(startingCell, sheet, 1);
-        }
-        startingCell = moveCellRight(startingCell, sheet, headers.length * -1);
-        startingCell = moveCellDown(startingCell, sheet, 1);
-        
-        for (int i = 0; i < changeOrders.length; i++) {
-            render(changeOrders[i], sheet, startingCell);
-            startingCell = moveCellDown(startingCell, sheet, 1);
-        }
-        
-        return moveCellDown(startingCell, sheet, changeOrders.length);
-    }
-    
-    private void render(ChangeOrderDTO changeOrder, Sheet sheet, Cell startingCell) {
-        CreationHelper createHelper = wb.getCreationHelper();
-        String executed;
-        if (changeOrder.isExecuted()) {
-            executed = "Yes";
-        } else {
-            executed = "no";
-        }
-        String[] values = {
-            changeOrder.getSubContractor(),
-            changeOrder.getAmount()+"",
-            changeOrder.getDescription(),
-            executed
-        };
-        
-        for (int i = 0; i < values.length; i++) {
-            startingCell.setCellValue(createHelper.createRichTextString(values[i]));
-            startingCell = moveCellRight(startingCell, sheet, 1);
-        }
-        startingCell = moveCellRight(startingCell, sheet, values.length * -1);
-    }
+//    private Cell render(ChangeOrderDTO[] changeOrders, Cell startingCell) {
+//        Sheet sheet = wb.getSheetAt(0);
+//        CreationHelper createHelper = wb.getCreationHelper();
+//        
+//        String[] headers = {
+//            "Sub contractor",
+//            "amount",
+//            "description",
+//            "executed?"
+//        };
+//        
+//        
+//        for (int i = 0; i < headers.length; i++) {
+//            startingCell.setCellValue(createHelper.createRichTextString(headers[i]));
+//            startingCell = moveCellRight(startingCell, sheet, 1);
+//        }
+//        startingCell = moveCellRight(startingCell, sheet, headers.length * -1);
+//        startingCell = moveCellDown(startingCell, sheet, 1);
+//        
+//        for (int i = 0; i < changeOrders.length; i++) {
+//            render(changeOrders[i], sheet, startingCell);
+//            startingCell = moveCellDown(startingCell, sheet, 1);
+//        }
+//        
+//        return moveCellDown(startingCell, sheet, changeOrders.length);
+//    }
+//    
+//    private void render(ChangeOrderDTO changeOrder, Sheet sheet, Cell startingCell) {
+//        CreationHelper createHelper = wb.getCreationHelper();
+//        String executed;
+//        if (changeOrder.isExecuted()) {
+//            executed = "Yes";
+//        } else {
+//            executed = "no";
+//        }
+//        String[] values = {
+//            changeOrder.getSubContractor(),
+//            changeOrder.getAmount()+"",
+//            changeOrder.getDescription(),
+//            executed
+//        };
+//        
+//        for (int i = 0; i < values.length; i++) {
+//            startingCell.setCellValue(createHelper.createRichTextString(values[i]));
+//            startingCell = moveCellRight(startingCell, sheet, 1);
+//        }
+//        startingCell = moveCellRight(startingCell, sheet, values.length * -1);
+//    }
     
     private Cell render(DrawRequestDTO drawRequest, Cell startingCell) {
         Sheet sheet = wb.getSheetAt(0);
         CreationHelper createHelper = wb.getCreationHelper();
         String[] rowTitles = {
-            "amount",
-            "max request to date",
-            "min request to date",
-            "retainage rel",
-            "contingency draw",
-            "contingency balance",
-            "balance to complete",
+            "Current Request",
+            "Recommendation for Funding",
+            "Conditions"
         };
         String[] rowValues = new String[rowTitles.length];
-            rowValues[0] = drawRequest.getCurrentRequest().toString();
-            if (drawRequest.getMaxRequest() != null)  
-                rowValues[1] = drawRequest.getMaxRequest().toString();
-            if (drawRequest.getMinRequest() != null)
-                rowValues[2] = drawRequest.getMinRequest().toString();
-            if (drawRequest.getRetainageRel() != null) 
-                rowValues[3] = drawRequest.getRetainageRel().toString();
-            if (drawRequest.getContigencyDraw() != null) 
-                rowValues[4] = drawRequest.getContigencyDraw().toString();
-            if (drawRequest.getContingencyBalance() != null)
-                rowValues[5] = drawRequest.getContingencyBalance().toString();
-            if (drawRequest.getBalanceToComplete() != null)
-                rowValues[6] = drawRequest.getBalanceToComplete().toString();
+            if (drawRequest.getCurrentRequest()!= null)  
+                rowValues[0] = drawRequest.getCurrentRequest().toString();
+            if (drawRequest.getCurrentRecommendation()!= null)
+                rowValues[1] = drawRequest.getCurrentRecommendation().toString();
+            if (drawRequest.getConditions()!= null) 
+                rowValues[2] = drawRequest.getConditions().toString();
+
         
         for (int i = 0; i < rowTitles.length; i++) {
             startingCell.setCellValue(createHelper.createRichTextString(rowTitles[i]));
@@ -213,11 +159,56 @@ public class ExcelConverter implements Writer {
             startingCell = moveCellRight(moveCellDown(startingCell, sheet, 1), sheet, -1);
         }
         
+        startingCell = render(drawRequest.getDrawRequestItems(), startingCell);
+        
         return startingCell;
         
     }
     
-    private Cell render(WalkThroughDTO[] walkThroughs, Cell startingCell) {
+    private Cell render(List<DrawRequestItemDTO> drawRequestItems, Cell startingCell) {
+        Sheet sheet = wb.getSheetAt(0);
+        CreationHelper createHelper = wb.getCreationHelper();
+        String[] columnTitles = {
+            "Type",
+            "SubContractor",
+            "Amount",
+            "Executed?",
+            "Description"
+        };
+        
+        for (int i = 0; i < columnTitles.length; i++) {
+            startingCell.setCellValue(createHelper.createRichTextString(columnTitles[i]));
+            startingCell = moveCellRight(startingCell, sheet, 1);
+        }
+        startingCell = this.moveCellDown(startingCell, sheet, 1);
+        startingCell = this.moveCellRight(startingCell, sheet, columnTitles.length * -1);
+        for (DrawRequestItemDTO drI: drawRequestItems) {
+            if (drI.getType() != null) {
+                startingCell.setCellValue(createHelper.createRichTextString(drI.getType()));
+            }
+            startingCell = this.moveCellRight(startingCell, sheet, 1);
+            if (drI.getSubContractor()!= null) {
+                startingCell.setCellValue(createHelper.createRichTextString(drI.getSubContractor()));
+            }
+            startingCell = this.moveCellRight(startingCell, sheet, 1);
+            startingCell.setCellValue(createHelper.createRichTextString(drI.getAmount() + ""));
+            startingCell = this.moveCellRight(startingCell, sheet, 1);
+            startingCell.setCellValue(createHelper.createRichTextString(drI.isExecuted() ? "yes" : "no"));
+            startingCell = this.moveCellRight(startingCell, sheet, 1);
+            if (drI.getDescription() != null) {
+                startingCell.setCellValue(createHelper.createRichTextString(drI.getDescription()));
+            }
+            startingCell = this.moveCellDown(startingCell, sheet, 1);
+            startingCell = this.moveCellRight(startingCell, sheet, columnTitles.length * -1);
+            }
+        return startingCell;
+        }
+        
+
+    /*
+    
+    */
+    private Cell render(List<WalkThroughDTO> walkThroughs, Cell startingCell, String nullString) {
         Sheet sheet = wb.getSheetAt(0);
         CreationHelper createHelper = wb.getCreationHelper();
         
@@ -237,8 +228,8 @@ public class ExcelConverter implements Writer {
         
         startingCell = moveCellDown(startingCell, sheet, 1);
         
-        for (int i = 0; i < walkThroughs.length; i++) {
-            render(walkThroughs[i], sheet, startingCell);
+        for (int i = 0; i < walkThroughs.size(); i++) {
+            render(walkThroughs.get(i), sheet, startingCell);
             startingCell = moveCellDown(startingCell, sheet, 1);
         }
         
@@ -310,4 +301,6 @@ public class ExcelConverter implements Writer {
             return row.getCell(cellLocation);
         }
     }
+
+ 
 }
