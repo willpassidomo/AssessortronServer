@@ -56,11 +56,6 @@ public class TaskerAPI {
         }
     }
     
-    public StringWrapper testEmail(@Named("recipient")String recipient, @Named("fileName")String fileName) {
-        Emailer emailer = new Emailer();
-        emailer.sendDefaultMail(recipient, recipient, new byte[1000], fileName);
-        return new StringWrapper("stuff");
-    }
     
     public List<String> getStringTests() {
         return Database.getStringValues();
