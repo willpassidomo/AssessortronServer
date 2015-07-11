@@ -229,8 +229,8 @@ public class ExcelConverter {
         startingCell = this.moveCellDown(startingCell, sheet, 1);
         startingCell = this.moveCellRight(startingCell, sheet, columnTitles.length * -1);
         for (DrawRequestItemDTO drI: drawRequestItems) {
-            if (drI.getType() != null) {
-                startingCell.setCellValue(createHelper.createRichTextString(drI.getType()));
+            if (drI.getTypeName() != null) {
+                startingCell.setCellValue(createHelper.createRichTextString(drI.getTypeName()));
             }
             startingCell = this.moveCellRight(startingCell, sheet, 1);
             if (drI.getSubContractor()!= null) {
