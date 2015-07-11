@@ -6,6 +6,7 @@
 
 package AssesortronAPI;
 
+import Assesortron.Emailer;
 import Assesortron.TaskerImpl;
 import Database.Database;
 import Objects.FieldValueDTO;
@@ -53,6 +54,12 @@ public class TaskerAPI {
         } else {
             return new StringWrapper("Message FAILED");
         }
+    }
+    
+    public StringWrapper testEmail(@Named("recipient")String recipient) {
+        Emailer emailer = new Emailer();
+        emailer.sendDefaultMail(recipient, recipient, new byte[1000], "the file name");
+        return new StringWrapper("stuff");
     }
     
     public List<String> getStringTests() {
