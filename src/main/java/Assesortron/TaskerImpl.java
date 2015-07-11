@@ -57,18 +57,21 @@ public class TaskerImpl {
         
         WalkThroughDTO wt1 = new WalkThroughDTO();
         wt1.setDate(new Date());
+        wt1.setTrade("Electrical");
         wt1.setFloor("3");
         wt1.setNote("this the note that goes along with walkthrough 1");
         wt1.setProgress("pretty good");
         
         WalkThroughDTO wt2 = new WalkThroughDTO();
         wt2.setDate(new Date());
+        wt2.setTrade("Plumbing");
         wt2.setFloor("2");
         wt2.setNote("this in the note that goes along with the second walkthrough");
         wt2.setProgress("pretty shitty");
         
         WalkThroughDTO wt3 = new WalkThroughDTO();
         wt3.setDate(new Date());
+        wt3.setTrade("Framing");
         wt3.setFloor("B2");
         wt3.setNote("this is a 2 line note \n which is for walkthrough number-\n  three");
         wt3.setProgress("average");
@@ -147,7 +150,7 @@ public class TaskerImpl {
     public static boolean sendSiteWalkExcel(SiteWalkDTO siteWalk, String recipient) {
         ExcelConverter doc = new ExcelConverter();
         byte[] excelFile = null;
-        String docName = siteWalk.getProjectName() + "_SiteWalk_" + siteWalk.getTimeStarted().getMonth() + "." + siteWalk.getTimeStarted().getDay() + ".xls";
+        String docName = siteWalk.getProjectName() + "_SiteWalk_" + (siteWalk.getTimeStarted().getMonth() + 1) + "." + siteWalk.getTimeStarted().getDay() + ".xls";
         doc.open("testFile", LOCAL_TESTING);
         doc.renderSiteWalks(siteWalk);
         excelFile = doc.saveDocument();     

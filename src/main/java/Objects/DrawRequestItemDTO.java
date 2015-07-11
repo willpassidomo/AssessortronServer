@@ -14,6 +14,7 @@ import java.util.Date;
 public class DrawRequestItemDTO {
     private String id;
     private String type;
+    private String typeName;
     private String subContractor;
     private double amount;
     private String description;
@@ -41,6 +42,8 @@ public class DrawRequestItemDTO {
         return type;
     }
 
+    
+    
     /**
      * @param type the type to set
      */
@@ -120,6 +123,20 @@ public class DrawRequestItemDTO {
     
     public void setDateSubmittedLong(long dateSubmitted) {
         this.dateSubmitted = new Date(dateSubmitted);
+    }
+
+    /**
+     * @return the typeName
+     */
+    public String getTypeName() {
+        return typeName;
+    }
+
+    /**
+     * @param typeName the typeName to set
+     */
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
      
 }
