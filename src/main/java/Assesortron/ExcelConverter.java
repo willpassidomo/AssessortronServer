@@ -3,6 +3,7 @@ package Assesortron;
 import Database.Database;
 import Objects.DrawRequestDTO;
 import Objects.DrawRequestItemDTO;
+import Objects.FieldValueDTO;
 import Objects.ProjectDTO;
 import Objects.SiteWalkDTO;
 import Objects.WalkThroughDTO;
@@ -16,6 +17,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.ClientAnchor;
@@ -40,12 +43,21 @@ public class ExcelConverter {
     int columnNumber;
     Workbook wb;
     
+    String nameProposal;
     
-    public void open(String nameProposal) {
+    private boolean TESTING = false;
+    
+    
+    public void open(String nameProposal, boolean local) {
+        this.TESTING = local;
         FileOutputStream fileOut = null;
         wb = new HSSFWorkbook();
         wb.createSheet(WorkbookUtil.createSafeSheetName(nameProposal));
+        if (TESTING) {
+            this.nameProposal = nameProposal;
+        }
     }
+    
     
     public void renderProject(ProjectDTO project) {
         for(SiteWalkDTO sw: project.getSiteWalks()) {
@@ -59,6 +71,21 @@ public class ExcelConverter {
         Cell startingCell = row.createCell(ITEM_TITLE_COLUMN);
         CreationHelper createHelper = wb.getCreationHelper();
         
+        startingCell.setCellValue(createHelper.createRichTextString("Date"));
+        startingCell = moveCellRight(startingCell, sheet, 1);
+        startingCell.setCellValue(createHelper.createRichTextString(siteWalk.getStartDate().toString()));
+        startingCell = moveCellDown(startingCell, sheet, 2);
+        startingCell = moveCellRight(startingCell, sheet, -1);
+        
+        startingCell.setCellValue(createHelper.createRichTextString("Field Report"));
+        startingCell = moveCellDown(startingCell, sheet, 1);
+        startingCell = moveCellRight(startingCell, sheet, 1);
+        
+        startingCell = renderFieldValues(siteWalk.getInFieldValues(), startingCell);
+        
+        startingCell = moveCellDown(startingCell, sheet, 1);
+        startingCell = moveCellRight(startingCell, sheet, -1);
+        
         startingCell.setCellValue(createHelper.createRichTextString("Draw Request"));
         startingCell = moveCellDown(startingCell, sheet, 1);
         startingCell = startingCell.getRow().createCell(ITEM_VALUE_COLUMN);
@@ -71,19 +98,33 @@ public class ExcelConverter {
         startingCell = moveCellDown(startingCell, sheet, 1);
         startingCell = startingCell.getRow().createCell(ITEM_VALUE_COLUMN);
 
-        startingCell = render(siteWalk.getWalkThroughs(), startingCell, null);
+        startingCell = renderWalkThroughs(siteWalk.getWalkThroughs(), startingCell);
     }
     
-    public byte[] saveDocument() throws IOException {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            wb.write(baos);
-            return baos.toByteArray();
-//        File file = new File(fileName + ".xlx");
-//        FileOutputStream fileOut = null;
-//        fileOut = new FileOutputStream(file);
-//        wb.write(fileOut);    
-//        fileOut.close();
-//        return file;
+    public byte[] saveDocument() {
+        if (!TESTING) {
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                wb.write(baos);
+                return baos.toByteArray();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcelConverter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            File file = new File("test" + ".xls");
+            FileOutputStream fileOut = null;
+            try {
+                fileOut = new FileOutputStream(file);
+                wb.write(fileOut);    
+                fileOut.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ExcelConverter.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ExcelConverter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
+        }
+        return null;
     }
     
 //    private Cell render(ChangeOrderDTO[] changeOrders, Cell startingCell) {
@@ -159,6 +200,11 @@ public class ExcelConverter {
             startingCell = moveCellRight(moveCellDown(startingCell, sheet, 1), sheet, -1);
         }
         
+        startingCell = this.moveCellDown(startingCell, sheet, 1);
+        startingCell.setCellValue(createHelper.createRichTextString("Items"));
+        startingCell = this.moveCellRight(startingCell, sheet, 1);
+        startingCell = this.moveCellDown(startingCell, sheet, 1);
+
         startingCell = render(drawRequest.getDrawRequestItems(), startingCell);
         
         return startingCell;
@@ -198,17 +244,31 @@ public class ExcelConverter {
             if (drI.getDescription() != null) {
                 startingCell.setCellValue(createHelper.createRichTextString(drI.getDescription()));
             }
+            
             startingCell = this.moveCellDown(startingCell, sheet, 1);
-            startingCell = this.moveCellRight(startingCell, sheet, columnTitles.length * -1);
+            startingCell = this.moveCellRight(startingCell, sheet, (columnTitles.length - 1) * -1);
             }
         return startingCell;
         }
         
 
-    /*
+    private Cell renderFieldValues(List<FieldValueDTO> fieldValues, Cell startingCell) {
+        Sheet sheet = wb.getSheetAt(0);
+        CreationHelper createHelper = wb.getCreationHelper();
+        
+        for (FieldValueDTO fv: fieldValues) {
+            startingCell.setCellValue(createHelper.createRichTextString(fv.getField()));
+            startingCell = this.moveCellRight(startingCell, sheet, 1);
+            startingCell.setCellValue(createHelper.createRichTextString(fv.getValue()));
+            startingCell = this.moveCellRight(startingCell, sheet, -1);
+            startingCell = this.moveCellDown(startingCell, sheet, 1);
+        }
+        
+        return startingCell;
+    }
     
-    */
-    private Cell render(List<WalkThroughDTO> walkThroughs, Cell startingCell, String nullString) {
+    
+    private Cell renderWalkThroughs(List<WalkThroughDTO> walkThroughs, Cell startingCell) {
         Sheet sheet = wb.getSheetAt(0);
         CreationHelper createHelper = wb.getCreationHelper();
         
@@ -219,7 +279,7 @@ public class ExcelConverter {
             "comments"
         };
 
-        Row headerRow  = sheet.createRow(startingCell.getRowIndex());
+        Row headerRow = sheet.createRow(startingCell.getRowIndex());
         Cell cell;
         for (int i = 0; i < headers.length; i++) {
             cell = headerRow.createCell(startingCell.getColumnIndex()+i);

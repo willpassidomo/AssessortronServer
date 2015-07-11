@@ -20,7 +20,7 @@ public class SiteWalkDTO {
     private Date lastEntry;
     private UUID projectID;
     private String projectName;
-    private List<FieldValueDTO> fieldValues;
+    private List<FieldValueDTO> fieldValues = new ArrayList<>();
     private List<WalkThroughDTO> walkThroughs = new ArrayList<>();
     
     private DrawRequestDTO drawRequest;
@@ -127,5 +127,22 @@ public class SiteWalkDTO {
     public void setDrawRequest(DrawRequestDTO drawRequests) {
         this.drawRequest = drawRequests;
     }    
+
+    /**
+     * @return the fieldValues
+     */
+    public List<FieldValueDTO> getFieldValues() {
+        return fieldValues;
+    }
+    
+    public List<FieldValueDTO> getInFieldValues() {
+        List<FieldValueDTO> in = new ArrayList<>();
+        for (FieldValueDTO fv: fieldValues) {
+            if (fv.isIn()) {
+                in.add(fv);
+            }
+        }
+        return in;
+    }
     
 }

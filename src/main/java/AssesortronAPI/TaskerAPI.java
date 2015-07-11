@@ -47,6 +47,14 @@ public class TaskerAPI {
         }
     }
     
+    public StringWrapper sendSiteWalkExcel(SiteWalkDTO siteWalk, @Named("recipient")String recipient) {
+        if(TaskerImpl.sendSiteWalkExcel(siteWalk, recipient)) {
+            return new StringWrapper("success!");
+        } else {
+            return new StringWrapper("Message FAILED");
+        }
+    }
+    
     public List<String> getStringTests() {
         return Database.getStringValues();
     }

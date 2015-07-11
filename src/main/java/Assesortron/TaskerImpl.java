@@ -8,6 +8,7 @@ package Assesortron;
 
 import Objects.DrawRequestDTO;
 import Objects.DrawRequestItemDTO;
+import Objects.FieldValueDTO;
 import Objects.ProjectDTO;
 import Objects.SiteWalkDTO;
 import Objects.WalkThroughDTO;
@@ -26,22 +27,52 @@ import java.util.logging.Logger;
  */
 public class TaskerImpl {
     
+    public static final boolean LOCAL_TESTING = false;
+    
     public static void main (String[] args) {
+        FieldValueDTO fv1 = new FieldValueDTO();
+        fv1.setField("Weather");
+        fv1.setValue("Sunny");
+        fv1.setIn(true);
+        
+        FieldValueDTO fv2 = new FieldValueDTO();
+        fv2.setField("Temperature");
+        fv2.setValue("67");
+        fv2.setIn(true);
+        
+        FieldValueDTO fv3 = new FieldValueDTO();
+        fv3.setField("Site Condition");
+        fv3.setValue("poor, dirty");
+        fv3.setIn(true);
+        
+        FieldValueDTO fv4 = new FieldValueDTO();
+        fv4.setField("Humidity");
+        fv4.setValue("%75");
+        fv4.setIn(true);
+        
+        FieldValueDTO fv5 = new FieldValueDTO();
+        fv5.setField("pointless question");
+        fv5.setValue("stuff");
+        fv5.setIn(false);
+        
         WalkThroughDTO wt1 = new WalkThroughDTO();
         wt1.setDate(new Date());
         wt1.setFloor("3");
         wt1.setNote("this the note that goes along with walkthrough 1");
         wt1.setProgress("pretty good");
+        
         WalkThroughDTO wt2 = new WalkThroughDTO();
         wt2.setDate(new Date());
         wt2.setFloor("2");
         wt2.setNote("this in the note that goes along with the second walkthrough");
         wt2.setProgress("pretty shitty");
+        
         WalkThroughDTO wt3 = new WalkThroughDTO();
         wt3.setDate(new Date());
         wt3.setFloor("B2");
         wt3.setNote("this is a 2 line note \n which is for walkthrough number-\n  three");
         wt3.setProgress("average");
+        
         DrawRequestItemDTO drI1 = new DrawRequestItemDTO();
         drI1.setType("Stored Materials");
         drI1.setAmount(54373);
@@ -49,6 +80,7 @@ public class TaskerImpl {
         drI1.setExecuted(true);
         drI1.setSubContractor("electrical soultions inc");
         drI1.setDescription("this is the description for changeorder number 1");
+        
         DrawRequestItemDTO drI2 = new DrawRequestItemDTO();
         drI2.setType("Change Order");
         drI2.setAmount(5342);
@@ -56,6 +88,7 @@ public class TaskerImpl {
         drI2.setExecuted(false);
         drI2.setSubContractor("cheif plumbing");
         drI2.setDescription("this is the description for changeorder number 2");
+        
         DrawRequestItemDTO drI3 = new DrawRequestItemDTO();
         drI3.setType("Stored Materials");
         drI3.setAmount(33.22);
@@ -63,6 +96,7 @@ public class TaskerImpl {
         drI3.setExecuted(true);
         drI3.setSubContractor("this guy over here");
         drI3.setDescription("d d d d d a sd a sd a ds avabdfbdsfasdf 1234");
+        
         DrawRequestDTO dr1 = new DrawRequestDTO();
         dr1.setCurrentRequestString("5000000");
         dr1.setCurrentRecommendationString("200");
@@ -78,10 +112,18 @@ public class TaskerImpl {
         wts.add(wt2);
         wts.add(wt3);
         
+        List<FieldValueDTO> fvs = new ArrayList<>();
+        fvs.add(fv1);
+        fvs.add(fv2);
+        fvs.add(fv3);
+        fvs.add(fv4);
+        fvs.add(fv5);
+        
         dr1.setDrawRequestItems(dris);
         dr1.setDate(new Date());
         SiteWalkDTO siteWalk = new SiteWalkDTO();
         siteWalk.setTimeStarted(new Date());
+        siteWalk.setFieldValues(fvs);
         siteWalk.setDrawRequest(dr1);   
         siteWalk.setWalkThroughs(wts);
      
@@ -92,15 +134,9 @@ public class TaskerImpl {
         ExcelConverter doc = new ExcelConverter();
         byte[] excelFile = null;
         String docName = project.getName() +".xls";
-        doc.open("testFile");
+        doc.open("testFile", LOCAL_TESTING);
         doc.renderProject(project);
-        try {
-            excelFile = doc.saveDocument();
-        } catch (IOException ex) {
-            Logger.getLogger(TaskerImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-       
+        excelFile = doc.saveDocument();
         Emailer emailer = new Emailer();
         emailer.sendDefaultMail(recipient, "default AT user", excelFile, docName);
 
@@ -112,18 +148,15 @@ public class TaskerImpl {
         ExcelConverter doc = new ExcelConverter();
         byte[] excelFile = null;
         String docName = siteWalk.getProjectName() + "_SiteWalk_" + siteWalk.getTimeStarted().getMonth() + "/" + siteWalk.getTimeStarted().getDay();
-        doc.open("testFile");
+        doc.open("testFile", LOCAL_TESTING);
         doc.renderSiteWalks(siteWalk);
-        try {
-            excelFile = doc.saveDocument();
+        excelFile = doc.saveDocument();     
+        if (!LOCAL_TESTING) {
+            Emailer emailer = new Emailer();
+            return emailer.sendDefaultMail(recipient, "default AT user", excelFile, docName);
+        } else {
+            return true;
         }
-        catch (IOException ex) {
-            Logger.getLogger(TaskerImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-        
-        Emailer emailer = new Emailer();
-        return emailer.sendDefaultMail(recipient, "default AT user", excelFile, docName);
     }
     
 }
